@@ -30,7 +30,7 @@ except AttributeError:
     numpy_include = np.get_numpy_include()
 
 
-cudamat_ext = Extension('utils.gpu_nms',
+cudamat_ext = [Extension('utils.gpu_nms',
                         sources=[
                                 'nms_kernel.cu'
                                 ],
@@ -38,6 +38,7 @@ cudamat_ext = Extension('utils.gpu_nms',
                         libraries=cuda_libs,
                         extra_compile_args=nvcc_compile_args,
                         include_dirs = [numpy_include, 'C:\\Programming\\CUDA\\v9.0\\include'])
+               ]
 
 
 class CUDA_build_ext(build_ext):
@@ -124,8 +125,8 @@ class CUDA_build_ext(build_ext):
             # This could be done by a NVCCCompiler class for all platforms.
         spawn(cmd, search_path, verbose, dry_run)
 
-setup(name="gpu_nms",
+setup(
       description="Performs linear algebra computation on the GPU via CUDA",
-      ext_modules=[cudamat_ext],
+      ext_modules=cudamat_ext,
       cmdclass={'build_ext': CUDA_build_ext},
 )
