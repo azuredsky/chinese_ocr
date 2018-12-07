@@ -7,6 +7,7 @@ except:
     pass
 
 def nms(dets, thresh):
+    #print('dets',dets)
     if dets.shape[0] == 0:
         return []
     if cfg.USE_GPU_NMS:

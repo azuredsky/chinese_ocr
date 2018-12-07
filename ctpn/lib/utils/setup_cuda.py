@@ -32,7 +32,7 @@ except AttributeError:
 
 cudamat_ext = [Extension('utils.gpu_nms',
                         sources=[
-                                'nms_kernel.cu'
+                                'nms_kernel.cu','gpu_nms.pyx'
                                 ],
                         language='c++',
                         libraries=cuda_libs,
